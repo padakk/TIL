@@ -70,5 +70,8 @@ int[] arr = list.stream().mapToInt(i->i).toArray();
 
 ```java
 list.subList(0, 4).clear();            // subList().clear()
-            //0번째 ~ 3번째 인덱스 삭제 (마지막 포함안됨)     
+            //0번째 ~ 3번째 인덱스 삭제 (마지막 포함안됨)
+
+list.removeIf(str -> str.startsWith("f"));
+list.removeIf(str -> str.contains("c"));//removeIf()
 ```
