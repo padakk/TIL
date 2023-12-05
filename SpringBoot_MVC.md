@@ -80,3 +80,73 @@ Ex) Model, Service가 이에 해당
 
 Ex) Model, Repository가 이에 해당
 ```
+<br>
+<h3>3. Layered Architecture의 예시</h3>
+
+- Entity
+```java
+@Getter@Setter
+@AllArgsConstructor
+@Entity
+public class MyUser {
+
+    @Id
+    private String userId;
+    private String password;
+}
+```
+- Controller
+```java
+@RestController
+public class MyController {
+
+    @Autowired
+    private MyService myService;
+
+    @GetMapping("/user/{userId}")//  /user/{userId}의 URI로 요청을 받는다.
+    public ResponseEntity<?> userInfo(@PathVariable String userId){
+                                 //  요청을 받으면 myService로 파라미터 userId만 전달
+        MyUser user = myService.getUser(userId);
+        return ResponseEntity.ok(user);
+    }
+}
+```
+- Service
+```java
+@Service
+public class MyService{
+
+    @Autowired
+    private MyRepository myRepository;
+
+    public MyUser getUser(String userId) {//  상위 계층(Controller)로부터 받은 userId 정보로 비즈니스 로직을 처리
+        return myRepository.findById(userId);
+    }
+}
+```
+- Repository
+```java
+@Repository
+public interface MyRepository extends JpaRepository<MyUser, String>{
+        /*데이터베이스에 직접 접근하여 데이터베이스로부터 데이터를 받아와서, 
+            상위 계층인 서비스계층으로 반환*/
+}
+```
+
+<br>
+<h3>4. 전반적인 동작흐름</h3>
+
+```
+클라이언트 요청 -> Controller -> Service -> Repository -> Service -> Controller -> 클라이언트 응답
+```
+
+상위 계층은 가장 가까운 하위 계층의 의존성을 주입받고 하위계층으로 요청을 전달,<br>
+
+하위 계층은 요청을 처리하여 상위 계층으로 반환<br>
+<br>
+<h3>5. 계층설계의 장점</h3>
+
+다른 계층의 역할을 침범하지 않는다.<br><br>
+이에 따라 각 컴포넌트의 역할이 명확해지므로<br><br>
+코드의 가독성과 기능 구현에 유리하고, 확장성이 좋아진다.<br><br>
+각 계층이 독립적으로 작성되기 때문에 다른 레이어와의 의존성을 낮춰 단위테스트에 유리하다.
