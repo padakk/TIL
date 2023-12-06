@@ -26,9 +26,9 @@ public class Main
     {
         StringBuilder sb = new StringBuilder();
         sb.append("문자열 ").append("연결"); //문자열 추가
-//      String str = stringBuilder;   // 에러
-        String str = sb.toString();   // String으로 변환
-        str = String.valueOf(sb);     // String으로 변환
+//      String str = stringBuilder;         // 에러
+        String str = sb.toString();         // String으로 변환
+        str = String.valueOf(sb);           // String으로 변환
         
         System.out.println(sb);
         System.out.println(str);
