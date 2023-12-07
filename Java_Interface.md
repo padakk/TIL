@@ -1,4 +1,4 @@
-# Java (23-11-27_TIL)
+# Java (23-11-27_TIL)(Interface)
 
 + Interface란?<br>
 &nbsp;&nbsp;추상메서드의 집합<br>
