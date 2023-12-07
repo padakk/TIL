@@ -48,5 +48,5 @@ public class Main
 
 - StringBuilder는 싱글쓰레드 환경에서 더 좋은 성능을 발휘한다.<br><br>
 - StringBuffer는 멀티쓰레드 환경에서 더 좋은 성능을 발휘한다.<br><br>
-- Stringbuilder의 메서드가 조금 더 형식에서 자유로운 느낌이다.<br>
-(배열을 붙이거나, 객체를 붙이거나, trimToSize() 와 같은 메서드 등)
+- 통상적으로 StringBuffer를 더 많이 사용하지만<br>
+StringBuffer는 클래스 안에 lock기능이 존재해서 deadlock의 위험성이 있다.<br><br>
